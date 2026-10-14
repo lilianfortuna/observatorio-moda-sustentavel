@@ -1,0 +1,388 @@
+{
+  "Faixa etária": [
+    {
+      "categoria": "35 a 44 anos",
+      "quantidade": 79,
+      "percentual": 23.5
+    },
+    {
+      "categoria": "45 a 54 anos",
+      "quantidade": 75,
+      "percentual": 22.3
+    },
+    {
+      "categoria": "18 a 24 anos",
+      "quantidade": 72,
+      "percentual": 21.4
+    },
+    {
+      "categoria": "25 a 34 anos",
+      "quantidade": 57,
+      "percentual": 17.0
+    },
+    {
+      "categoria": "55 anos ou mais",
+      "quantidade": 47,
+      "percentual": 14.0
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 6,
+      "percentual": 1.8
+    }
+  ],
+  "Gênero": [
+    {
+      "categoria": "Feminino",
+      "quantidade": 247,
+      "percentual": 73.5
+    },
+    {
+      "categoria": "Masculino",
+      "quantidade": 88,
+      "percentual": 26.2
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 1,
+      "percentual": 0.3
+    }
+  ],
+  "Renda mensal": [
+    {
+      "categoria": "De R$ 5.001 a R$ 10.000",
+      "quantidade": 95,
+      "percentual": 28.3
+    },
+    {
+      "categoria": "De R$ 1.001 a R$ 3.000",
+      "quantidade": 89,
+      "percentual": 26.5
+    },
+    {
+      "categoria": "De R$ 3.001 a R$ 5.000",
+      "quantidade": 84,
+      "percentual": 25.0
+    },
+    {
+      "categoria": "Até R$ 1.000",
+      "quantidade": 36,
+      "percentual": 10.7
+    },
+    {
+      "categoria": "Acima de R$ 10.000",
+      "quantidade": 32,
+      "percentual": 9.5
+    }
+  ],
+  "Escolaridade": [
+    {
+      "categoria": "Ensino Superior completo",
+      "quantidade": 115,
+      "percentual": 34.2
+    },
+    {
+      "categoria": "Especialização (lato sensu)",
+      "quantidade": 81,
+      "percentual": 24.1
+    },
+    {
+      "categoria": "Ensino Superior incompleto",
+      "quantidade": 66,
+      "percentual": 19.6
+    },
+    {
+      "categoria": "Ensino Médio completo",
+      "quantidade": 37,
+      "percentual": 11.0
+    },
+    {
+      "categoria": "Mestrado",
+      "quantidade": 22,
+      "percentual": 6.5
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 15,
+      "percentual": 4.5
+    }
+  ],
+  "Frequência de compra": [
+    {
+      "categoria": "Trimestralmente",
+      "quantidade": 122,
+      "percentual": 36.3
+    },
+    {
+      "categoria": "Mensalmente",
+      "quantidade": 112,
+      "percentual": 33.3
+    },
+    {
+      "categoria": "Semestralmente",
+      "quantidade": 58,
+      "percentual": 17.3
+    },
+    {
+      "categoria": "Anualmente",
+      "quantidade": 34,
+      "percentual": 10.1
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 10,
+      "percentual": 3.0
+    }
+  ],
+  "Gastos com roupas": [
+    {
+      "categoria": "De R$ 101 a R$ 300",
+      "quantidade": 142,
+      "percentual": 42.3
+    },
+    {
+      "categoria": "Até R$ 100",
+      "quantidade": 87,
+      "percentual": 25.9
+    },
+    {
+      "categoria": "De R$ 301 a R$ 500",
+      "quantidade": 68,
+      "percentual": 20.2
+    },
+    {
+      "categoria": "Acima de R$ 500",
+      "quantidade": 39,
+      "percentual": 11.6
+    }
+  ],
+  "Compra de segunda mão": [
+    {
+      "categoria": "Nunca",
+      "quantidade": 153,
+      "percentual": 45.5
+    },
+    {
+      "categoria": "Raramente",
+      "quantidade": 105,
+      "percentual": 31.2
+    },
+    {
+      "categoria": "Ocasionalmente",
+      "quantidade": 55,
+      "percentual": 16.4
+    },
+    {
+      "categoria": "Sim, frequentemente",
+      "quantidade": 23,
+      "percentual": 6.8
+    }
+  ],
+  "Peças herdadas": [
+    {
+      "categoria": "Não tenho",
+      "quantidade": 177,
+      "percentual": 52.7
+    },
+    {
+      "categoria": "Sim, eu tenho e utilizo",
+      "quantidade": 129,
+      "percentual": 38.4
+    },
+    {
+      "categoria": "Eu tenho, mas não utilizo",
+      "quantidade": 30,
+      "percentual": 8.9
+    }
+  ],
+  "Leitura de etiquetas": [
+    {
+      "categoria": "As vezes",
+      "quantidade": 139,
+      "percentual": 41.4
+    },
+    {
+      "categoria": "Nunca tive esse hábito",
+      "quantidade": 109,
+      "percentual": 32.4
+    },
+    {
+      "categoria": "Sempre leio",
+      "quantidade": 88,
+      "percentual": 26.2
+    }
+  ],
+  "Aluguel de roupas": [
+    {
+      "categoria": "Não",
+      "quantidade": 190,
+      "percentual": 56.5
+    },
+    {
+      "categoria": "Sim",
+      "quantidade": 146,
+      "percentual": 43.5
+    }
+  ],
+  "Conhecimento de moda circular": [
+    {
+      "categoria": "Não",
+      "quantidade": 158,
+      "percentual": 47.0
+    },
+    {
+      "categoria": "Mais ou menos",
+      "quantidade": 97,
+      "percentual": 28.9
+    },
+    {
+      "categoria": "Sim",
+      "quantidade": 81,
+      "percentual": 24.1
+    }
+  ],
+  "Disposição a pagar mais": [
+    {
+      "categoria": "Talvez",
+      "quantidade": 214,
+      "percentual": 63.7
+    },
+    {
+      "categoria": "Sim",
+      "quantidade": 77,
+      "percentual": 22.9
+    },
+    {
+      "categoria": "Não",
+      "quantidade": 45,
+      "percentual": 13.4
+    }
+  ],
+  "Canal de compra": [
+    {
+      "categoria": "Compro pelas duas opções",
+      "quantidade": 179,
+      "percentual": 53.3
+    },
+    {
+      "categoria": "Em loja física",
+      "quantidade": 120,
+      "percentual": 35.7
+    },
+    {
+      "categoria": "Pela internet",
+      "quantidade": 37,
+      "percentual": 11.0
+    }
+  ],
+  "Conhecimento de marcas sustentáveis": [
+    {
+      "categoria": "Não",
+      "quantidade": 136,
+      "percentual": 40.5
+    },
+    {
+      "categoria": "Não tenho certeza",
+      "quantidade": 108,
+      "percentual": 32.1
+    },
+    {
+      "categoria": "Sim",
+      "quantidade": 92,
+      "percentual": 27.4
+    }
+  ],
+  "Percepção de impacto ambiental": [
+    {
+      "categoria": "Concordo",
+      "quantidade": 149,
+      "percentual": 44.3
+    },
+    {
+      "categoria": "Concordo totalmente",
+      "quantidade": 139,
+      "percentual": 41.4
+    },
+    {
+      "categoria": "Neutro",
+      "quantidade": 43,
+      "percentual": 12.8
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 5,
+      "percentual": 1.5
+    }
+  ],
+  "Relação com os ODS": [
+    {
+      "categoria": "Não",
+      "quantidade": 173,
+      "percentual": 51.5
+    },
+    {
+      "categoria": "Não conheço as ODS",
+      "quantidade": 100,
+      "percentual": 29.8
+    },
+    {
+      "categoria": "Sim",
+      "quantidade": 63,
+      "percentual": 18.8
+    }
+  ],
+  "Critério de compra": [
+    {
+      "categoria": "Estilo",
+      "quantidade": 136,
+      "percentual": 40.5
+    },
+    {
+      "categoria": "Preço",
+      "quantidade": 116,
+      "percentual": 34.5
+    },
+    {
+      "categoria": "Durabilidade",
+      "quantidade": 66,
+      "percentual": 19.6
+    },
+    {
+      "categoria": "Marca",
+      "quantidade": 15,
+      "percentual": 4.5
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 3,
+      "percentual": 0.9
+    }
+  ],
+  "Reforma de roupas": [
+    {
+      "categoria": "Faço isso sempre que posso",
+      "quantidade": 127,
+      "percentual": 37.8
+    },
+    {
+      "categoria": "Nunca fiz",
+      "quantidade": 110,
+      "percentual": 32.7
+    },
+    {
+      "categoria": "Não sei fazer, por isso acabo sempre comprando roupa nova",
+      "quantidade": 75,
+      "percentual": 22.3
+    },
+    {
+      "categoria": "Nunca pensei nessa possibilidade",
+      "quantidade": 23,
+      "percentual": 6.8
+    },
+    {
+      "categoria": "Outras respostas (agrupadas)",
+      "quantidade": 1,
+      "percentual": 0.3
+    }
+  ]
+}

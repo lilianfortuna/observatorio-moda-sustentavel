@@ -1,0 +1,70 @@
+{
+  "Percepção ambiental × pagar mais": {
+    "categorias": [
+      "Baixa/neutra",
+      "Alta",
+      "Muito alta"
+    ],
+    "percentuais": [
+      10.4,
+      16.8,
+      33.8
+    ],
+    "variavel": "Disposição declarada a pagar mais (%)",
+    "chi2": 26.72,
+    "v_cramer": 0.199,
+    "interpretacao": "Percepção ambiental mais elevada se associou à maior disposição declarada a pagar mais. A resposta “Talvez” permaneceu frequente (55,4% no grupo de percepção muito alta).",
+    "nota": "Valores percentuais condicionais extraídos do artigo; não implicam causalidade."
+  },
+  "Moda circular × roupas de segunda mão": {
+    "categorias": [
+      "Conhece: ocasional/frequente",
+      "Conhece: nunca/raramente",
+      "Não conhece: nunca/raramente"
+    ],
+    "percentuais": [
+      35.8,
+      64.2,
+      86.1
+    ],
+    "variavel": "Percentual dentro do respectivo grupo (%)",
+    "chi2": 23.38,
+    "v_cramer": 0.187,
+    "interpretacao": "Entre quem conhecia o conceito, 35,8% adquiria peças usadas ocasional ou frequentemente; mesmo nesse grupo, 64,2% nunca ou raramente o fazia. Entre os que não conheciam, 86,1% nunca ou raramente comprava.",
+    "nota": "As três categorias representam agrupamentos diferentes: não devem ser somadas."
+  },
+  "Marcas sustentáveis × leitura de etiquetas": {
+    "categorias": [
+      "Conhece/comprou",
+      "Não conhece",
+      "Não tem certeza"
+    ],
+    "percentuais": [
+      44.6,
+      19.9,
+      18.5
+    ],
+    "variavel": "Sempre consulta etiquetas (%)",
+    "chi2": 26.68,
+    "v_cramer": 0.199,
+    "interpretacao": "O hábito de sempre ler etiquetas foi mais frequente entre participantes que afirmaram conhecer ou já ter comprado de marcas sustentáveis. Leitura de etiquetas não comprova uma compra sustentável.",
+    "nota": "Categorias de contato declarado com marcas sustentáveis."
+  },
+  "ODS × pagar mais": {
+    "categorias": [
+      "Relaciona escolhas aos ODS",
+      "Conhece, não relaciona",
+      "Desconhece os ODS"
+    ],
+    "percentuais": [
+      41.3,
+      21.4,
+      14.0
+    ],
+    "variavel": "Disposição declarada a pagar mais (%)",
+    "chi2": 19.17,
+    "v_cramer": 0.169,
+    "interpretacao": "Relacionar o vestuário aos ODS esteve associado a maior intenção declarada de pagar mais, embora 49,2% dos que relacionavam escolhas aos ODS tenham respondido “Talvez”.",
+    "nota": "Associação de magnitude limitada."
+  }
+}
