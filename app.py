@@ -18,7 +18,42 @@ div[data-testid="stMetric"]{background:#FAF8F4;border:1px solid #EAE4DA;border-r
 .note{background:#F7F5F0;padding:18px 20px;border-left:5px solid #347D70;border-radius:9px;line-height:1.65}
 .subtitle{color:#61736D;font-size:1.08rem}
 .section-kicker{color:#C77255;font-size:.79rem;letter-spacing:.12em;font-weight:750;text-transform:uppercase}
+@media (max-width: 640px) {
+  .block-container{padding:1.0rem .85rem 2rem;max-width:100%}
+  h1{font-size:1.75rem!important;line-height:1.18!important}
+  h2{font-size:1.4rem!important}
+  h3{font-size:1.15rem!important}
+  .note{padding:12px 14px;font-size:.94rem}
+  .subtitle{font-size:.96rem}
+  [data-testid='stMetric']{padding:.65rem!important}
+  [data-testid='stMetricValue']{font-size:1.45rem!important}
+  [data-testid='stPlotlyChart']{max-width:100%;overflow:hidden}
+  [data-testid='stPlotlyChart'] .modebar{display:none!important}
+  [data-testid='stDataFrame']{max-width:100%;}
+}
+
 </style>''',unsafe_allow_html=True)
+PLOT_CONFIG={'displayModeBar':False,'responsive':True,'scrollZoom':False}
+
+def brief_label(label):
+    # Exibir nomes curtos nos eixos; o nome integral permanece na tabela e no tooltip.
+    replacements={
+       'Ensino Superior completo':'Superior completo',
+       'Ensino Superior incompleto':'Superior incompleto',
+       'Ensino Médio completo':'Médio completo',
+       'Especialização (lato sensu)':'Especialização',
+       'Outras respostas (agrupadas)':'Outras respostas',
+       'Não tem certeza':'Não tem certeza',
+       'Conhece/comprou':'Conhece/comprou',
+       'Relaciona escolhas aos ODS':'Relaciona aos ODS',
+    }
+    label=str(label)
+    if label in replacements: return replacements[label]
+    if len(label)<=22: return label
+    import textwrap
+    parts=textwrap.wrap(label,width=20,break_long_words=False,break_on_hyphens=False)
+    return '<br>'.join(parts[:3])
+
 COLORS=['#347D70','#356A80','#C77255','#D2A34E','#8F7393','#88958C','#BD7F79','#737C92']
 @st.cache_data(show_spinner=False)
 def load_aggregates():
@@ -43,9 +78,12 @@ def bar_chart(labels,values,title,xlabel='Percentual (%)'):
     df=pd.DataFrame({'Categoria':labels,'Percentual':values})
     fig=px.bar(df, x='Percentual',y='Categoria',orientation='h',text='Percentual',color='Categoria',color_discrete_map={category: COLORS[i%len(COLORS)] for i,category in enumerate(labels)})
     fig.update_traces(showlegend=False, texttemplate='%{text:.1f}%', textposition='outside',cliponaxis=False)
-    fig.update_layout(height=max(310,len(df)*47+120),margin=dict(t=15,b=35,l=10,r=85),plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(0,0,0,0)',xaxis_title=xlabel,yaxis_title='',yaxis={'categoryorder':'total ascending'},xaxis_range=[0, max(values+[1])*1.22])
+    fig.update_layout(height=max(320,len(df)*54+110),margin=dict(t=15,b=45,l=6,r=43),plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(0,0,0,0)',xaxis_title=xlabel,yaxis_title='',yaxis={'categoryorder':'total ascending'},xaxis_range=[0, max(values+[1])*1.27],autosize=True)
     fig.update_xaxes(showgrid=True,gridcolor='#EDEAE4',zeroline=False)
-    fig.update_yaxes(tickfont=dict(size=13,color='#3A4844'))
+    fig.update_yaxes(tickfont=dict(size=11,color='#3A4844'),tickmode='array',
+                      tickvals=labels,ticktext=[brief_label(label) for label in labels],automargin=True)
+    fig.update_traces(customdata=df['Categoria'],hovertemplate='%{customdata}<br>%{x:.1f}%<extra></extra>',
+                      textfont=dict(size=12))
     return fig
 
 # Dados publicados com categorias completas; sem reconstruir células ausentes.
@@ -75,7 +113,7 @@ def full_distribution_chart(detail):
     fig.update_layout(barmode='stack',height=250 if len(detail['groups'])==1 else 360,
         margin=dict(t=30,b=30,l=10,r=12),legend=dict(orientation='h',y=1.20,x=0),
         xaxis=dict(title='Percentual dentro de cada grupo (%)',range=[0,105],gridcolor='#EDEAE4'),
-        yaxis=dict(title='',autorange='reversed'),paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)')
+        yaxis=dict(title='',autorange='reversed',automargin=True,tickfont=dict(size=11)),paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)')
     return fig
 
 # Nuvem calculada offline sobre respostas de marcas; SVG embutido e dados agregados somente.
@@ -147,16 +185,16 @@ elif section=='Perfil e hábitos':
     group=st.selectbox('Tema',list(groups))
     indicador=st.selectbox('Indicador',groups[group])
     st.subheader(indicador)
-    st.caption('Distribuição percentual das respostas. Passe o cursor sobre as barras para consultar os valores.')
+    st.caption('Distribuição percentual das respostas. Toque nas barras (celular) ou passe o cursor (computador) para consultar os valores.')
     df=pd.DataFrame(distributions[indicador])
-    st.plotly_chart(bar_chart(df.categoria.tolist(),df.percentual.tolist(),indicador),use_container_width=True)
+    st.plotly_chart(bar_chart(df.categoria.tolist(),df.percentual.tolist(),indicador),use_container_width=True,config=PLOT_CONFIG)
     if len(df):
         top=df.sort_values('percentual',ascending=False).iloc[0]
         st.markdown(f"**Leitura do gráfico:** a categoria mais frequente foi **{top['categoria']}** ({top['percentual']:.1f}%).".replace('.',','))
     if st.toggle('Mostrar tabela e quantidades absolutas',value=False):
         st.dataframe(df.rename(columns={'categoria':'Resposta','quantidade':'Participantes','percentual':'Percentual (%)'}),hide_index=True,use_container_width=True)
     st.download_button('Baixar tabela agregada (CSV)',df.to_csv(index=False).encode('utf-8-sig'),file_name='indicador_agregado.csv',mime='text/csv')
-    st.caption('Percentuais calculados sobre N=336. Respostas pouco frequentes foram agrupadas como “Outras respostas (agrupadas)”. Alguns campos tiveram padronizações limitadas; verifique as categorias originais antes de usar em novas análises.')
+    st.caption('No celular, a tabela abaixo permite conferir os nomes completos das categorias. Percentuais calculados sobre N=336. Respostas pouco frequentes foram agrupadas como “Outras respostas (agrupadas)”. Alguns campos tiveram padronizações limitadas; verifique as categorias originais antes de usar em novas análises.')
 
 elif section=='Associações estatísticas':
     st.title('Associações entre conhecimento e consumo')
@@ -167,7 +205,7 @@ elif section=='Associações estatísticas':
     if nome in FULL_2026:
         st.markdown('#### Distribuição detalhada das respostas')
         detail=FULL_2026[nome]
-        st.plotly_chart(full_distribution_chart(detail),use_container_width=True)
+        st.plotly_chart(full_distribution_chart(detail),use_container_width=True,config=PLOT_CONFIG)
         st.caption(detail['caption'])
         df_detail=pd.DataFrame({'Grupo':detail['groups'],**detail['series']})
         with st.expander('Consultar e exportar a tabela detalhada'):
@@ -175,7 +213,7 @@ elif section=='Associações estatísticas':
             st.download_button('Baixar CSV detalhado',df_detail.to_csv(index=False).encode('utf-8-sig'),file_name='distribuicao_detalhada.csv',mime='text/csv')
     else:
         st.markdown('#### Comparação entre grupos')
-        st.plotly_chart(bar_chart(a['categorias'],a['percentuais'],a['variavel']),use_container_width=True)
+        st.plotly_chart(bar_chart(a['categorias'],a['percentuais'],a['variavel']),use_container_width=True,config=PLOT_CONFIG)
         st.caption('Percentuais da resposta afirmativa nos grupos apresentados no artigo.')
         p=PARTIAL_2026.get(nome)
         if p:
@@ -186,7 +224,7 @@ elif section=='Associações estatísticas':
             for label,value in segments.items():
                 fig.add_bar(x=[value],y=[p['group']],orientation='h',name=label,marker_color=STACK_COLORS[label],text=[f'{value:.1f}%'],textposition='inside',hovertemplate=label+': %{x:.1f}%<extra></extra>')
             fig.update_layout(barmode='stack',height=230,xaxis=dict(title='Percentual (%)',range=[0,105]),yaxis=dict(title=''),legend=dict(orientation='h',y=1.3),margin=dict(t=20,b=30,l=0,r=10),plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(0,0,0,0)')
-            st.plotly_chart(fig,use_container_width=True)
+            st.plotly_chart(fig,use_container_width=True,config=PLOT_CONFIG)
             if p['missing']:
                 st.caption('Este gráfico parcial não apresenta a categoria “'+p['missing']+'”: o percentual correspondente não foi publicado explicitamente nesse trecho do artigo. Não se trata de barra 100% completa.')
             else:

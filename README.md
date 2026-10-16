@@ -37,3 +37,7 @@ Inclui retrato fornecido e autorizado pela pesquisadora, minicurrículo, identif
 **Limitação:** a primeira abertura após repouso (cold start) do Streamlit Community Cloud depende da infraestrutura de hospedagem e pode continuar demorando. Teste o tempo na primeira abertura separadamente do tempo entre seleções de gráficos.
 
 **Reversão:** em caso de problema, use o histórico de commits do GitHub para reverter a alteração para a versão anterior.
+
+
+## Versão 6.3 — Adaptação para celulares
+Ajustes responsivos de margens, tipografia, rótulos abreviados somente nos eixos, e desativação da barra de ferramentas dos gráficos. Valores, JSON e fotos preservados. Os nomes completos permanecem nas tabelas e nos detalhes interativos.
