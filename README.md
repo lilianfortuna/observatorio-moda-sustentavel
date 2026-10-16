@@ -33,3 +33,7 @@ streamlit run app.py
 - Rever a categorização para padronização das respostas de formulário.
 - Confirmar condições de consentimento/CEP e política de privacidade antes da publicação.
 - Personalizar a identidade visual com logos e retratos com autorização.
+
+
+## Versão 2.0 — identidade visual
+A versão 2.0 utiliza paleta verde, terracota, azul, mostarda e ameixa, com agrupamento temático para navegação. Os arquivos agregados JSON não foram modificados.
