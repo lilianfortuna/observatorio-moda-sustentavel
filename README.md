@@ -25,3 +25,15 @@ Nova apresentação visual e científica, indicadores contextualizados, explica�
 
 ## Atualização 6.1 — Equipe e publicações
 Inclui retrato fornecido e autorizado pela pesquisadora, minicurrículo, identificação dos coautores, DOI da publicação de 2025 e situação editorial de 2026.
+
+
+## Versão 6.2 — desempenho
+- Leitura dos arquivos agregados com cache do Streamlit (`st.cache_data`).
+- Cache para geração dos gráficos Plotly utilizados repetidamente.
+- Importação de Plotly apenas nas páginas que utilizam gráficos.
+- Redução de tamanho da fotografia para carregamento mais rápido, preservando sua aparência e enquadramento.
+- Dados e resultados científicos inalterados.
+
+**Limitação:** a primeira abertura após repouso (cold start) do Streamlit Community Cloud depende da infraestrutura de hospedagem e pode continuar demorando. Teste o tempo na primeira abertura separadamente do tempo entre seleções de gráficos.
+
+**Reversão:** em caso de problema, use o histórico de commits do GitHub para reverter a alteração para a versão anterior.

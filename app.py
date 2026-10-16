@@ -4,8 +4,6 @@ Somente dados agregados integram esta distribuição.
 import json
 from pathlib import Path
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
 import streamlit as st
 
 ROOT = Path(__file__).parent
@@ -22,13 +20,25 @@ div[data-testid="stMetric"]{background:#FAF8F4;border:1px solid #EAE4DA;border-r
 .section-kicker{color:#C77255;font-size:.79rem;letter-spacing:.12em;font-weight:750;text-transform:uppercase}
 </style>''',unsafe_allow_html=True)
 COLORS=['#347D70','#356A80','#C77255','#D2A34E','#8F7393','#88958C','#BD7F79','#737C92']
-with open(ROOT/'data/indicadores_2025.json',encoding='utf8') as f: distributions=json.load(f)
-with open(ROOT/'data/associacoes_2026.json',encoding='utf8') as f: associations=json.load(f)
+@st.cache_data(show_spinner=False)
+def load_aggregates():
+    with open(ROOT/'data/indicadores_2025.json', encoding='utf8') as f:
+        distributions = json.load(f)
+    with open(ROOT/'data/associacoes_2026.json', encoding='utf8') as f:
+        associations = json.load(f)
+    return distributions, associations
+
+distributions, associations = load_aggregates()
 
 section=st.sidebar.radio('Navegação',['Início','Perfil e hábitos','Associações estatísticas','Marcas e motivações','Sobre a pesquisa','Equipe e publicações'])
+if section in ('Perfil e hábitos','Associações estatísticas'):
+    import plotly.express as px
+    import plotly.graph_objects as go
+
 st.sidebar.caption('Pesquisa com 336 respondentes · Interior paulista · Base original compartilhada entre as análises de 2025 e 2026')
 
 
+@st.cache_data(show_spinner=False,max_entries=40)
 def bar_chart(labels,values,title,xlabel='Percentual (%)'):
     df=pd.DataFrame({'Categoria':labels,'Percentual':values})
     fig=px.bar(df, x='Percentual',y='Categoria',orientation='h',text='Percentual',color='Categoria',color_discrete_map={category: COLORS[i%len(COLORS)] for i,category in enumerate(labels)})
@@ -55,6 +65,7 @@ PARTIAL_2026={
  'Percepção ambiental × pagar mais':{'group':'Percepção muito alta','segments':{'Sim':33.8,'Talvez':55.4},'missing':'Não'},
  'ODS × pagar mais':{'group':'Relaciona escolhas aos ODS','segments':{'Sim':41.3,'Talvez':49.2,'Não':9.5},'missing':None}
 }
+@st.cache_data(show_spinner=False,max_entries=20)
 def full_distribution_chart(detail):
     fig=go.Figure()
     for key,values in detail['series'].items():
