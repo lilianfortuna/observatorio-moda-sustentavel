@@ -17,3 +17,7 @@ A nuvem histórica de motivações foi obtida do repositório do painel de 2025,
 
 ## Validação
 A compilação sintática foi verificada. Antes da publicação definitiva, revisar os rótulos originais, o algoritmo de identificação de marcas e verificar as seções no aplicativo em execução. A amostra por conveniência não permite generalização populacional nem inferência causal.
+
+
+## Versão 6.0 — página inicial
+Nova apresentação visual e científica, indicadores contextualizados, explicação de base única e orientação de navegação. As demais seções, bases agregadas e figuras estão preservadas da v5.
