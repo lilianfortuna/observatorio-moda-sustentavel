@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 ROOT = Path(__file__).parent
@@ -35,6 +36,29 @@ def bar_chart(labels,values,title,xlabel='Percentual (%)'):
     fig.update_layout(height=max(310,len(df)*47+120),margin=dict(t=15,b=35,l=10,r=85),plot_bgcolor='rgba(0,0,0,0)',paper_bgcolor='rgba(0,0,0,0)',xaxis_title=xlabel,yaxis_title='',yaxis={'categoryorder':'total ascending'},xaxis_range=[0, max(values+[1])*1.22])
     fig.update_xaxes(showgrid=True,gridcolor='#EDEAE4',zeroline=False)
     fig.update_yaxes(tickfont=dict(size=13,color='#3A4844'))
+    return fig
+
+# Distribuições completas explicitamente apresentadas no artigo de 2026.
+# Não inferir categorias ausentes nem reconstruir células sem contagens originais.
+FULL_2026={
+    'Moda circular × roupas de segunda mão':{
+        'groups':['Conhece o conceito'],
+        'series':{'Nunca':[32.1],'Raramente':[32.1],'Ocasionalmente':[23.5],'Frequentemente':[12.3]},
+        'caption':'Frequência declarada de aquisição de roupas de segunda mão, entre os participantes que conhecem moda circular. Outros grupos mantidos no gráfico de síntese.'},
+    'Marcas sustentáveis × leitura de etiquetas':{
+        'groups':['Conhece/comprou','Não conhece','Não tem certeza'],
+        'series':{'Sempre':[44.6,19.9,18.5],'Às vezes':[38.0,44.9,39.8],'Nunca':[17.4,35.3,41.7]},
+        'caption':'Frequência de leitura das etiquetas de composição segundo contato declarado com marcas sustentáveis. Percentuais arredondados podem somar 99,9% ou 100,1%.'}
+}
+STACK_COLORS={'Sempre':'#347D70','Às vezes':'#D2A34E','Nunca':'#C77255','Raramente':'#356A80','Ocasionalmente':'#D2A34E','Frequentemente':'#347D70'}
+def full_distribution_chart(detail):
+    fig=go.Figure()
+    for key,values in detail['series'].items():
+        fig.add_bar(name=key,y=detail['groups'],x=values,orientation='h',marker_color=STACK_COLORS[key],text=[f'{v:.1f}%' if v>=9 else '' for v in values],textposition='inside',textfont=dict(color='white',size=13),hovertemplate='%{y}<br>'+key+': %{x:.1f}%<extra></extra>')
+    fig.update_layout(barmode='stack',height=270 if len(detail['groups'])==1 else 380,
+        margin=dict(t=15,b=30,l=10,r=15),legend=dict(orientation='h',y=1.16,x=0),
+        xaxis=dict(title='Percentual dentro do grupo (%)',range=[0,105],gridcolor='#EDEAE4'),
+        yaxis=dict(title='',autorange='reversed'),paper_bgcolor='rgba(0,0,0,0)',plot_bgcolor='rgba(0,0,0,0)')
     return fig
 
 if section=='Início':
@@ -89,7 +113,17 @@ elif section=='Associações estatísticas':
     nome=st.selectbox('Selecione o cruzamento',list(associations))
     a=associations[nome]
     st.subheader(nome)
+    st.caption('Visão resumida: percentual referente à categoria de resposta identificada em cada barra.')
     st.plotly_chart(bar_chart(a['categorias'],a['percentuais'],a['variavel']),use_container_width=True)
+    if nome in FULL_2026:
+        st.markdown('#### Distribuição detalhada das respostas')
+        detail=FULL_2026[nome]
+        st.plotly_chart(full_distribution_chart(detail),use_container_width=True)
+        st.caption(detail['caption'])
+        with st.expander('Consultar os percentuais detalhados em tabela'):
+            st.dataframe(pd.DataFrame({'Grupo':detail['groups'],**detail['series']}),hide_index=True,use_container_width=True)
+    else:
+        st.caption('A distribuição completa das categorias de resposta não está incluída neste arquivo de dados agregado; não foram estimados valores ausentes.')
     x,y,z=st.columns(3)
     x.metric('Qui-quadrado (χ²)',f"{a['chi2']:.2f}".replace('.',','))
     y.metric('Significância','p < 0,001')
@@ -98,7 +132,7 @@ elif section=='Associações estatísticas':
     st.write(a['interpretacao'])
     st.warning('As associações são estatisticamente significativas, mas têm magnitude limitada. Os resultados não demonstram causalidade.')
     st.caption(a['nota'])
-    st.markdown('#### Resultados em tabela')
+    st.markdown('#### Resultados resumidos em tabela')
     df=pd.DataFrame({'Categoria':a['categorias'],'Percentual (%)':a['percentuais']})
     st.dataframe(df,hide_index=True,use_container_width=True)
     st.download_button('Baixar tabela agregada (CSV)',df.to_csv(index=False).encode('utf-8-sig'),file_name='associacao_agregada.csv',mime='text/csv')
@@ -129,4 +163,4 @@ else:
     st.caption('Pesquisa com apoio CAPES — Código de Financiamento 001 (conforme artigo de 2026).')
 
 st.divider()
-st.caption('Observatório da Moda Sustentável no Interior Paulista · Protótipo de divulgação científica · Dados agregados · 2026')
+st.caption('Observatório da Moda Sustentável no Interior Paulista · Versão 3.0 · Dados agregados · 2026')

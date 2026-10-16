@@ -37,3 +37,7 @@ streamlit run app.py
 
 ## Versão 2.0 — identidade visual
 A versão 2.0 utiliza paleta verde, terracota, azul, mostarda e ameixa, com agrupamento temático para navegação. Os arquivos agregados JSON não foram modificados.
+
+
+## Versão 3.0 — gráficos detalhados
+Foram acrescentados gráficos de barras empilhadas para os cruzamentos que possuem distribuição completa explicitada no artigo (moda circular/segunda mão, restrito ao grupo que conhece o conceito; marcas sustentáveis/leitura de etiquetas). Os demais cruzamentos permanecem resumidos. Não foram inventados valores ausentes.
