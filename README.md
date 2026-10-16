@@ -21,3 +21,7 @@ A compilação sintática foi verificada. Antes da publicação definitiva, revi
 
 ## Versão 6.0 — página inicial
 Nova apresentação visual e científica, indicadores contextualizados, explicação de base única e orientação de navegação. As demais seções, bases agregadas e figuras estão preservadas da v5.
+
+
+## Atualização 6.1 — Equipe e publicações
+Inclui retrato fornecido e autorizado pela pesquisadora, minicurrículo, identificação dos coautores, DOI da publicação de 2025 e situação editorial de 2026.
